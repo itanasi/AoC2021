@@ -6,16 +6,16 @@ fun main() {
     val filename = "input"
     val lines = File(filename).readLines()  // returns List<String>
     // Create 3-sliding window list
-    val finalwindow: MutableList<Int> = mutableListOf()
+    val finalWindow: MutableList<Int> = mutableListOf()
     for (i in lines.indices){
         if (i < 2){
             continue
         }
-        finalwindow.add(lines[i].toInt() + lines[i-1].toInt() + lines[i-2].toInt())
+        finalWindow.add(lines[i].toInt() + lines[i-1].toInt() + lines[i-2].toInt())
     }
     var inc = 0
     var prev = 0
-    for (value in finalwindow)
+    for (value in finalWindow)
     {
         //println(value.toString())
         if (prev == 0){
@@ -27,5 +27,5 @@ fun main() {
         }
         prev = value
     }
-    println("increases: "+inc.toString())
+    println("increases: $inc")
 }
