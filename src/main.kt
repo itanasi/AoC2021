@@ -7,16 +7,19 @@ fun main() {
     val lines = File(filename).readLines()  // returns List<String>
     var horiz = 0
     var depth = 0
+    var aim = 0
     for (line in lines){
         val parts = line.split(" ")
         val direction = parts[0]
         val value = parts[1]
-        if (direction == "forward")
+        if (direction == "forward") {
             horiz += value.toInt()
+            depth += aim * value.toInt()
+        }
         if (direction == "down")
-            depth += value.toInt()
+            aim += value.toInt()
         if (direction == "up")
-            depth -= value.toInt()
+            aim -= value.toInt()
     }
     println("horiz: $horiz")
     println("depth: $depth")
