@@ -1,28 +1,29 @@
 import java.io.File
-
+import kotlin.math.pow
 
 fun main() {
     println("Hello World")
     val filename = "input"
+    val length = 12
     val lines = File(filename).readLines()  // returns List<String>
-    var horiz = 0
-    var depth = 0
-    var aim = 0
+    var count = MutableList(length) {i -> 0}
     for (line in lines){
-        val parts = line.split(" ")
-        val direction = parts[0]
-        val value = parts[1]
-        if (direction == "forward") {
-            horiz += value.toInt()
-            depth += aim * value.toInt()
+        for (bit in 0..length-1) {
+            count[bit] = count[bit] + line[bit].toString().toInt()
         }
-        if (direction == "down")
-            aim += value.toInt()
-        if (direction == "up")
-            aim -= value.toInt()
     }
-    println("horiz: $horiz")
-    println("depth: $depth")
-    val mult = horiz * depth
-    println("mult: $mult")
+    println("count: $count")
+    val numLines = lines.size
+    println("numLines: $numLines")
+    var gamma = 0
+    for (bit in 0..length-1){
+        if (count[bit] > numLines/2){
+            gamma += 2.toDouble().pow(length-bit-1).toInt()
+        }
+    }
+    val epsilon = gamma.xor(2.toDouble().pow(length).toInt()-1)
+    println("gamma: $gamma")
+    println("epsilon: $epsilon")
+    val power = gamma * epsilon
+    println("power: $power")
 }
