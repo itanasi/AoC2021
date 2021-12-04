@@ -1,5 +1,4 @@
 import java.io.File
-import kotlin.system.exitProcess
 
 /*
 --- Day 4: Giant Squid ---
@@ -39,27 +38,37 @@ fun bingo(board: Array<Array<String>> ): Boolean {
     val boardRows = board.size
     val boardCols = board.first().size
     // do check if BINGO!
-    var bingo = 1
+    var bingo = 0
     // Same ROW, check all columns
     for (row in 0 until boardCols) {
+        var rowbingo = 1
         for (newCol in 0 until boardCols) {
             if (board[row][newCol] != "") {
-                bingo = 0
+                rowbingo = 0
                 break
             }
+        }
+        if (rowbingo == 1){
+            bingo = 1
         }
     }
     // Same COL, check all rows
     if (bingo == 0) {
-        bingo = 1
+        bingo = 0
         for (col in 0 until boardCols) {
+            var colbingo = 1
             for (newRow in 0 until boardRows) {
                 if (board[newRow][col] != "") {
-                    bingo = 0
+                    colbingo = 0
                     break
                 }
             }
+            if (colbingo == 1){
+                bingo = 1
+                break
+            }
         }
+
     }
     return (bingo == 1)
 }
