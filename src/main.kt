@@ -61,24 +61,66 @@ fun main() {
         var x2 = segment[1][0].toInt()
         var y2 = segment[1][1].toInt()
         //println("$x1, $y1  $x2, $y2")
-        // only use horizontal and vertical line segments
-        if (x1 != x2 && y1 != y2)
-            continue
 
-        // organize smallest to largest to make iteration easier
-        if(x1==x2 && y1 > y2){
-            val temp = y1
-            y1 = y2
-            y2 = temp
-        }
-        if(y1==y2 && x1 > x2){
-            val temp = x1
-            x1 = x2
-            x2 = temp
-        }
-        for(x in x1..x2) {
-            for (y in y1..y2) {
-                grid["$x,$y"] = grid.getOrDefault("$x,$y", 0) + 1
+        var direction = ""
+        // check "h"orizontal, "v"ertical, or "d"iagonal
+        if(x1==x2)
+            direction = "h"
+        else if(y1==y2)
+            direction = "v"
+        else
+            direction = "d"
+
+        // vertical and horizontal are easy
+        if((direction == "h") or (direction == "v")) {
+            // organize smallest to largest to make iteration easier
+            if(x1==x2 && y1 > y2){
+                val temp = y1
+                y1 = y2
+                y2 = temp
+            }
+            if(y1==y2 && x1 > x2){
+                val temp = x1
+                x1 = x2
+                x2 = temp
+            }
+            for (x in x1..x2) {
+                for (y in y1..y2) {
+                    grid["$x,$y"] = grid.getOrDefault("$x,$y", 0) + 1
+                }
+            }
+        }else{
+            // diagonal!
+            // Determine orientation
+            if (x1 < x2){
+                if (y1 < y2){
+                    var y = y1
+                    for (x in x1..x2){
+                        grid["$x,$y"] = grid.getOrDefault("$x,$y", 0) + 1
+                        y++
+                    }
+                }else{
+                    var y = y1
+                    for (x in x1..x2){
+                        grid["$x,$y"] = grid.getOrDefault("$x,$y", 0) + 1
+                        y--
+                    }
+                }
+            }else{
+                // start at point 2 (x2, y2)
+                if (y2 < y1){
+                    var y = y2
+                    for (x in x2..x1){
+                        grid["$x,$y"] = grid.getOrDefault("$x,$y", 0) + 1
+                        y++
+                    }
+                }else{
+                    var y = y2
+                    for (x in x2..x1){
+                        grid["$x,$y"] = grid.getOrDefault("$x,$y", 0) + 1
+                        y--
+                    }
+                }
             }
         }
     }
