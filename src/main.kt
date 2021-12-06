@@ -1,5 +1,4 @@
 import java.io.File
-import kotlin.math.pow
 
 /*
 --- Day 6: Lanternfish ---
@@ -71,7 +70,7 @@ fun main() {
     println("Hello World")
     val filename = "input"
     val lines = File(filename).readLines()  // returns List<String>
-    var lanternFish : MutableList<Int> = lines.first().split(",").map{it.toInt()}.toMutableList()
+    val lanternFish : MutableList<Int> = lines.first().split(",").map{it.toInt()}.toMutableList()
 
     val numDays = 256
     var lanternFishAges : MutableList<Long> = mutableListOf(0, 0, 0, 0, 0, 0, 0, 0, 0)
