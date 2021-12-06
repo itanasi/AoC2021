@@ -56,31 +56,47 @@ In this example, after 18 days, there are a total of 26 fish. After 80 days, the
 
 Find a way to simulate lanternfish. How many lanternfish would there be after 80 days?
 
+--- Part Two ---
+
+Suppose the lanternfish live forever and have unlimited food and space. Would they take over the entire ocean?
+
+After 256 days in the example above, there would be a total of 26984457539 lanternfish!
+
+How many lanternfish would there be after 256 days?
+
+
  */
 
 fun main() {
     println("Hello World")
     val filename = "input"
     val lines = File(filename).readLines()  // returns List<String>
-    var lanternFish :MutableList<Int> = lines.first().split(",").map{it.toInt()}.toMutableList()
+    var lanternFish : MutableList<Int> = lines.first().split(",").map{it.toInt()}.toMutableList()
 
-    val numDays = 80
-    var newLanternFish = lanternFish.toMutableList()  // copy
+    val numDays = 256
+    var lanternFishAges : MutableList<Long> = mutableListOf(0, 0, 0, 0, 0, 0, 0, 0, 0)
+    for (fish in lanternFish)
+    {
+        lanternFishAges[fish]++
+    }
     // day 0 is input
     for (day in 1..numDays){
-        for (fish in lanternFish.indices) {
-            if (lanternFish[fish] == 0) {
-                newLanternFish[fish] = 6  // reset this fish
-                newLanternFish += 8  // add new fish
-            }else{
-                newLanternFish[fish] = lanternFish[fish]-1
+        val newLanternFishAges = mutableListOf<Long>(0, 0, 0, 0, 0, 0, 0, 0, 0)
+        for (fishAge in lanternFishAges.indices) {
+            if (fishAge == 0)
+            {
+                newLanternFishAges[8] = lanternFishAges[0]
+                newLanternFishAges[6] += lanternFishAges[0]
+            }
+            else{
+                newLanternFishAges[fishAge-1] += lanternFishAges[fishAge]
             }
         }
-        println(newLanternFish)
-        lanternFish = newLanternFish.toMutableList()
-        val dayFish = lanternFish.size
+        //println(newLanternFish)
+        lanternFishAges = newLanternFishAges.toMutableList()
+        val dayFish = lanternFishAges.sumOf{it}
         println("day $day dayFish $dayFish")
     }
-    val totalFish = lanternFish.size
+    val totalFish = lanternFishAges.size
     println("total fish=$totalFish")
 }
