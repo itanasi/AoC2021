@@ -80,5 +80,16 @@ fun main() {
     val filename = "input"
     val lines = File(filename).readLines()  // returns List<String>
 
-    val output = lines.
+    var counter1478 = 0
+    for (line in lines){
+        val output = line.split(" | ").last().split(" ")
+        for (num in output)
+        {
+            if(num.length==2) counter1478++
+            if(num.length==3) counter1478++
+            if(num.length==4) counter1478++
+            if(num.length==7) counter1478++
+        }
+    }
+    println(counter1478)
 }
