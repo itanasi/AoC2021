@@ -32,4 +32,89 @@ fun main() {
     val filename = "input"
     val lines = File(filename).readLines()  // returns List<String>
 
+    val maxY = lines.size
+    val maxX = lines.first().length
+
+    var totalRisk = 0
+
+    for (Y in lines.indices)
+    {
+        for (X in lines[Y].indices)
+        {
+            if (Y == 0){
+                if (X == 0)
+                {
+                    if (lines[Y][X].digitToInt() < lines[Y+1][X].digitToInt() &&
+                            lines[Y][X].digitToInt() < lines[Y][X+1].digitToInt()){
+                        totalRisk += lines[Y][X].digitToInt() + 1
+                    }
+                }
+                else if (X == lines[Y].length-1)
+                {
+                    if (lines[Y][X].digitToInt() < lines[Y][X-1].digitToInt() &&
+                            lines[Y][X].digitToInt() < lines[Y+1][X].digitToInt()){
+                        totalRisk += lines[Y][X].digitToInt() + 1
+                    }
+                }
+                else
+                {
+                    if (lines[Y][X].digitToInt() < lines[Y+1][X].digitToInt() &&
+                            lines[Y][X].digitToInt() < lines[Y][X-1].digitToInt() &&
+                            lines[Y][X].digitToInt() < lines[Y][X+1].digitToInt()){
+                        totalRisk += lines[Y][X].digitToInt() + 1
+                    }
+                }
+            }
+            else if (Y == lines.size - 1)
+            {
+                if (X == 0){
+                    if (lines[Y][X].digitToInt() < lines[Y-1][X].digitToInt() &&
+                            lines[Y][X].digitToInt() < lines[Y][X+1].digitToInt()){
+                        totalRisk += lines[Y][X].digitToInt() + 1
+                    }
+                }
+                else if( X == lines[Y].length-1)
+                {
+                    if (lines[Y][X].digitToInt() < lines[Y-1][X].digitToInt() &&
+                            lines[Y][X].digitToInt() < lines[Y][X-1].digitToInt()){
+                        totalRisk += lines[Y][X].digitToInt() + 1
+                    }
+                }
+                else{
+                    if (lines[Y][X].digitToInt() < lines[Y-1][X].digitToInt() &&
+                            lines[Y][X].digitToInt() < lines[Y][X-1].digitToInt() &&
+                            lines[Y][X].digitToInt() < lines[Y][X+1].digitToInt()){
+                        totalRisk += lines[Y][X].digitToInt() + 1
+                    }
+                }
+            }
+            else
+            {
+                if (X == 0){
+                    if (lines[Y][X].digitToInt() < lines[Y-1][X].digitToInt() &&
+                            lines[Y][X].digitToInt() < lines[Y+1][X].digitToInt() &&
+                            lines[Y][X].digitToInt() < lines[Y][X+1].digitToInt()){
+                        totalRisk += lines[Y][X].digitToInt() + 1
+                    }
+                }
+                else if( X == lines[Y].length-1)
+                {
+                    if (lines[Y][X].digitToInt() < lines[Y-1][X].digitToInt() &&
+                            lines[Y][X].digitToInt() < lines[Y+1][X].digitToInt() &&
+                            lines[Y][X].digitToInt() < lines[Y][X-1].digitToInt()){
+                        totalRisk += lines[Y][X].digitToInt() + 1
+                    }
+                }
+                else{
+                    if (lines[Y][X].digitToInt() < lines[Y-1][X].digitToInt() &&
+                            lines[Y][X].digitToInt() < lines[Y+1][X].digitToInt() &&
+                            lines[Y][X].digitToInt() < lines[Y][X-1].digitToInt() &&
+                            lines[Y][X].digitToInt() < lines[Y][X+1].digitToInt()){
+                        totalRisk += lines[Y][X].digitToInt() + 1
+                    }
+                }
+            }
+        }
+    }
+    println(totalRisk)
 }
