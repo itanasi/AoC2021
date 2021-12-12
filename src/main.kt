@@ -1,5 +1,6 @@
 import java.io.File
-import kotlin.math.pow
+import kotlin.math.abs
+import kotlin.math.min
 
 /*
 --- Day 7: The Treachery of Whales ---
@@ -43,5 +44,19 @@ fun main() {
     println("Hello World")
     val filename = "input"
     val lines = File(filename).readLines()  // returns List<String>
+
+    val crabPos = lines.first().split(",").map{it.toInt()}
+    var minPos = 0
+    // Default to moving all to position 0
+    var minFuel = crabPos.sumOf { it }
+    for (pos in 1..crabPos.maxOf{ it }){
+        val fuel = crabPos.map{ abs(it - pos) }.sumOf { it }
+        if (fuel < minFuel){
+            minPos = pos
+            minFuel = fuel
+        }
+    }
+    println("minPos: $minPos  minFuel: $minFuel")
+
 
 }
